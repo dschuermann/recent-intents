@@ -1,0 +1,20 @@
+
+
+Reads out recent Intents _with_ their extras bundle.
+Apps could leak sensitive private information in their Intent extras.
+
+
+
+Citing baske from http://stackoverflow.com/questions/15501260/protecting-extra-data-in-android-intent 
+
+Starting from Android 4.1.1 an additional permission was added to guard extra's being read by third party apps using the RecentTaskInfo. This permission (android.Manifest.permission.GET_DETAILED_TASKS) can only be acquired by the system. Without this permission, the extra's will be swapped out before the baseIntent is returned via the RecentTaskInfo.
+
+From the comment of commit http://androidxref.com/4.2.2_r1/history/frameworks/base/services/java/com/android/server/am/ActivityManagerService.java#8238e717df4bc5eebf15f97172d68af3599a95bb:
+
+    Add new signature-level permission to get details of tasks.
+
+    Third party apps now can't get access to the extras of the intents associated with tasks, to keep private data in them from leaking out.
+
+    Change-Id: I95af9e181ac42557bc8b981807e7ddd266a88d0e
+
+So it seems that effort is being put into making intent extra's safer to transport sensitive information. I don't know if there are other ways in which these extra can leak, but at least the extra's seem OK from JB up.

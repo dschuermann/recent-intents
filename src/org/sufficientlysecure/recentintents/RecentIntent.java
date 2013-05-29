@@ -51,8 +51,8 @@ public class RecentIntent extends Activity {
                 for (RecentTaskInfo task : recentTasks) {
                     Intent i = task.baseIntent;
 
-                    text.setText("intent package: " + i.getPackage() + "\n");
-                    text.setText("intent action: " + i.getAction() + "\n");
+                    text.append("intent package: " + i.getPackage() + "\n");
+                    text.append("intent action: " + i.getAction() + "\n");
                     // On Android >= 4.1.1 extras is null
                     // http://stackoverflow.com/questions/15501260/protecting-extra-data-in-android-intent
                     Bundle bundle = i.getExtras();
@@ -60,21 +60,21 @@ public class RecentIntent extends Activity {
                         Set<String> ks = bundle.keySet();
                         Iterator<String> iterator = ks.iterator();
 
-                        text.setText("Bundle extras:" + "\n");
-                        text.setText("------------------------------" + "\n");
+                        text.append("Bundle extras:" + "\n");
+                        text.append("------------------------------" + "\n");
                         while (iterator.hasNext()) {
                             String key = iterator.next();
                             Object value = bundle.get(key);
 
                             if (value != null) {
-                                text.setText(key + " : " + value.toString() + "\n");
+                                text.append(key + " : " + value.toString() + "\n");
                             } else {
-                                text.setText(key + " : null" + "\n");
+                                text.append(key + " : null" + "\n");
                             }
                         }
-                        text.setText("------------------------------" + "\n");
+                        text.append("------------------------------" + "\n");
                     } else {
-                        text.setText("Bundle extras: null" + "\n");
+                        text.append("Bundle extras: null" + "\n");
                     }
                 }
 
